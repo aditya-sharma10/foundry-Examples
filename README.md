@@ -154,25 +154,26 @@ contract EventTest is Test {
 
 
 
-📚 Resources
+## 📚 Resources
 
-📖 Foundry Book
+- 📖 **Foundry Book** – Comprehensive guide to Foundry and smart contract testing  
+- 🛠 **Solidity Docs** – Official Solidity documentation for language reference  
+- 🧪 **Ethereum Docs** – Learn Ethereum fundamentals, development, and best practices  
 
-🛠 Solidity Docs
+---
 
-🧪 Ethereum Docs
+## 🤝 Contributing
 
-🤝 Contributing
+Contributions are always welcome! 🎉  
 
-Contributions are welcome! 🎉
+If you’d like to contribute:  
+1. **Fork** this repository  
+2. **Create a new branch** (`feature/my-feature`)  
+3. **Commit** your changes with clear messages  
+4. **Push** your branch to your forked repo  
+5. Open a **Pull Request** for review  
 
-Fork this repo
-
-Create a new branch (feature/my-feature)
-
-Commit your changes
-
-Push and open a Pull Request
+Let’s make this project better together! 💪
 
 
 
