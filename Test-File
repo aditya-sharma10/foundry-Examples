@@ -1,0 +1,34 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Test} from "forge-std/Test.sol";
+import {Counter} from "../src/Counter.sol";
+
+contract CounterTest is Test {
+    Counter public counter;
+
+    function setUp() public {
+       counter = new Counter();
+    }
+    function test_Owner() public {
+        counter.setownr(payable(address(0x123)));
+        assertEq(counter.owner(), address(0x123));
+
+    }
+  function test_Revert_When_NonOwnerCallsSetOwner() public {
+        counter.setownr(payable(address(0x123)));
+        assertEq(counter.owner(), address(0x123));
+        vm.prank(address(0x456)); 
+        vm.expectRevert("Only owner can call this function");
+        counter.setownr(payable(address(0x789))); 
+
+     
+
+receive() external payable {}
+function testvalsend() public {
+    counter.setownr(payable(address(0x45566))); //note that to change owner here is necesary because otherwise asseteq will fail (becasue the owner is this contract)
+    vm.deal(address(this), 1 ether);
+    counter.sendval{value: 0.5 ether}(0.5 ether);
+    assertEq(counter.owner().balance, 0.5 ether);
+}
+}
