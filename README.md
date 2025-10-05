@@ -1,26 +1,24 @@
 # ⚒️ Foundry-Examples  
 
-This repository demonstrates a simple **Solidity smart contract** named `Counter` along with its corresponding **unit tests** written using **Foundry**.  
+This repository demonstrates simple **Solidity smart contracts** along with their corresponding **unit tests** written using **Foundry**.  
 
 The project is designed for:  
 - 🟢 Beginners exploring blockchain & smart contracts  
 - 🔵 Intermediate developers who want to sharpen their skills in:  
   - Ownership control  
   - Ether transfers  
+  - Event handling  
   - Unit testing with Foundry  
 
 ---
 
 ## 📦 Project Structure  
 
-📂 foundry-Examples
-┣ 📂 src # Solidity contracts
-┣ 📂 script # Deployment scripts
-┣ 📂 test # Unit tests written in Solidity
-┗ 📄 README.md # Project documentation
-
-yaml
-Copy code
+📂 foundry-Examples  
+┣ 📂 src # Solidity contracts  
+┣ 📂 script # Deployment scripts  
+┣ 📂 test # Unit tests written in Solidity  
+┗ 📄 README.md # Project documentation  
 
 ---
 
@@ -45,7 +43,8 @@ forge build
 bash
 Copy code
 forge test
-🛠️ Example: Counter Contract
+🛠️ Example Contracts
+1️⃣ Counter Contract
 solidity
 Copy code
 pragma solidity ^0.8.0;
@@ -69,6 +68,33 @@ Storage & retrieval of values
 
 Fully tested using Foundry
 
+2️⃣ Event Contract
+solidity
+Copy code
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+contract Event {
+    event Transfer(address indexed from, address indexed to, uint256 amount);
+
+    function transfer(address from, address to, uint256 amount) public {
+        emit Transfer(from, to, amount);
+    }
+
+    function transferMany(address from, address[] calldata to, uint256[] calldata amounts) public {
+        for (uint256 i = 0; i < to.length; i++) {
+            emit Transfer(from, to[i], amounts[i]);
+        }
+    }
+}
+✅ Features:
+
+Emits Transfer events for single and multiple transfers
+
+Demonstrates event logging and indexed parameters
+
+Useful for testing event listeners in smart contract applications
+
 📚 Resources
 📖 Foundry Book
 
@@ -87,5 +113,65 @@ Commit your changes
 
 Push and open a Pull Request
 
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import {Test} from "forge-std/Test.sol";
+import {Event} from "../src/Event.sol";
+
+contract EventTest is Test {
+    Event public eventContract;
+
+    // Called before each test
+    function setUp() public {
+        eventContract = new Event();
+    }
+
+    // Define the same event signature locally for expectEmit
+    event Transfer(address indexed from, address indexed to, uint256 amount);
+
+    // Test single transfer event
+    function testTransfer() public {
+        // Expect the event to be emitted with specific parameters
+        vm.expectEmit(true, true, false, true); // check indexed from, to; skip data topics; check value
+        emit Transfer(address(1), address(2), 100);
+
+        // Call the contract function that should emit the event
+        eventContract.transfer(address(1), address(2), 100);
+    }
+
+    // Test multiple transfer events
+    function testMultipleEvent() public {
+        address ;
+        to[0] = address(1);
+        to[1] = address(2);
+        to[2] = address(3);
+
+        uint256 ;
+        amounts[0] = 100;
+        amounts[1] = 200;
+        amounts[2] = 300;
+
+        // Loop through each expected event
+        for (uint256 i = 0; i < to.length; i++) {
+            vm.expectEmit(true, true, false, true);
+            emit Transfer(address(0xabc), to[i], amounts[i]);
+        }
+
+        // Call the contract function that emits multiple events
+        eventContract.transferMany(address(0xabc), to, amounts);
+    }
+}
+✅ Notes / Best Practices
+vm.expectEmit: This sets the expectation for an event before the actual call. The parameters (checkTopic1, checkTopic2, checkTopic3, checkData) allow selective matching of indexed and non-indexed event parameters.
+
+Local event declaration: The test must declare the event locally with the same signature for expectEmit to work.
+
+Multiple event tests: For transferMany, you must call vm.expectEmit for each event individually, as you’ve done.
+
+Naming conventions: I renamed event1 → eventContract and Eventtest → EventTest for readability.
+
 📜 License
 MIT License © 2025 Aditya Sharma
+
