@@ -67,11 +67,11 @@ contract Counter {
 ```
 ✅ Features:
 
-Increment & decrement functionality
+1. Increment & decrement functionality
 
-Storage & retrieval of values
+2. Storage & retrieval of values
 
-Fully tested using Foundry
+3. Fully tested using Foundry
 
 
 ###2️⃣ Event Contract
@@ -144,15 +144,16 @@ contract EventTest is Test {
 ```
 ✅ Notes / Best Practices:
 
-vm.expectEmit: Sets the expectation for an event before the actual call. Parameters (checkTopic1, checkTopic2, checkTopic3, checkData) allow selective matching of indexed and non-indexed event parameters.
+1. vm.expectEmit: Sets the expectation for an event before the actual call. Parameters (checkTopic1, checkTopic2, checkTopic3, checkData) allow selective matching of indexed and non-indexed event parameters.
 
-Local event declaration: The test must declare the event locally with the same signature for expectEmit to work.
+2. Local event declaration: The test must declare the event locally with the same signature for expectEmit to work.
 
-Multiple event tests: For transferMany, call vm.expectEmit for each event individually.
+3. Multiple event tests: For transferMany, call vm.expectEmit for each event individually.
 
-Naming conventions: Descriptive names improve readability (e.g., eventContract, EventTest).
+4. Naming conventions: Descriptive names improve readability (e.g., eventContract, EventTest).
 
-```
+
+
 📚 Resources
 
 📖 Foundry Book
@@ -172,6 +173,6 @@ Create a new branch (feature/my-feature)
 Commit your changes
 
 Push and open a Pull Request
-```
+
 
 
