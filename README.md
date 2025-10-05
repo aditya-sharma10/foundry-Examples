@@ -28,10 +28,13 @@ The project is designed for:
 ```bash
 git clone https://github.com/aditya-sharma10/foundry-Examples.git
 cd foundry-Examples
+```
 
 ### 2️⃣ Install dependencies
 
-Make sure you have Foundry installed:
+``` Make sure you have Foundry installed:
 
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
++ curl -L https://foundry.paradigm.xyz | bash
++ foundryup
+```
+
