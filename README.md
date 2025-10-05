@@ -1,89 +1,91 @@
-⚡ Foundry Counter
+# ⚒️ Foundry-Examples  
 
-A beginner-friendly Solidity project demonstrating ownership management, Ether transfers, and testing with Foundry cheatcodes.
+This repository demonstrates a simple **Solidity smart contract** named `Counter` along with its corresponding **unit tests** written using **Foundry**.  
 
-📌 Overview
+The project is designed for:  
+- 🟢 Beginners exploring blockchain & smart contracts  
+- 🔵 Intermediate developers who want to sharpen their skills in:  
+  - Ownership control  
+  - Ether transfers  
+  - Unit testing with Foundry  
 
-The Counter contract is a simple yet practical example for learning:
+---
 
-👤 Ownership control – restrict access to critical functions.
+## 📦 Project Structure  
 
-💰 Ether transfers – safely send Ether to the owner.
+📂 foundry-Examples
+┣ 📂 src # Solidity contracts
+┣ 📂 script # Deployment scripts
+┣ 📂 test # Unit tests written in Solidity
+┗ 📄 README.md # Project documentation
 
-🛡 Access modifiers – enforce secure usage patterns.
+yaml
+Copy code
 
-🧪 Testing with Foundry – leverage cheatcodes for robust test coverage.
+---
 
-This project bridges theory and practice, making it ideal for those starting with smart contract development.
+## 🚀 Getting Started  
 
-📝 Contract Features
+### 1️⃣ Clone the repository  
+```bash
+git clone https://github.com/aditya-sharma10/foundry-Examples.git
+cd foundry-Examples
+2️⃣ Install dependencies
+Make sure you have Foundry installed:
 
-✅ Owner Variable – Stores the contract owner as a payable address.
-✅ Ownership Transfer – setOwner() lets the current owner transfer ownership.
-✅ Secure Ether Transfer – sendVal() sends Ether to the owner, validating the input and transfer success.
-✅ Modifier – ownerCheck ensures only the owner can perform restricted actions.
-✅ Revert Messages – Provide clarity when conditions fail.
-
-🛠 Technologies
-
-Solidity ^0.8.30
-
-Foundry (Forge & Cast)
-
-forge-std/Test.sol for cheatcodes
-
-🧪 Testing with Foundry
-
-The tests showcase real-world Foundry cheatcode usage:
-
-🎭 vm.prank → Simulates function calls from different addresses.
-
-⚠️ vm.expectRevert → Expects transactions to fail with specific errors.
-
-💵 vm.deal → Assigns Ether balances to addresses for testing transfers.
-
-🏷 vm.label → Labels addresses in traces for easier debugging.
-
-Example test snippet:
-
-function test_Revert_When_NonOwnerCallsSetOwner() public {
-    counter.setOwner(payable(address(0x123)));
-    assertEq(counter.owner(), address(0x123));
-
-    vm.prank(address(0x456)); // simulate non-owner
-    vm.expectRevert("Only owner can call this function");
-    counter.setOwner(payable(address(0x789))); // must revert
-}
-
-🎯 Purpose
-
-📚 This repository is a learning resource, not production-ready code.
-It helps developers practice:
-
-Writing secure Solidity contracts.
-
-Implementing modifiers & access control.
-
-Handling Ether transfers safely.
-
-Building confidence in Foundry testing.
-
-🚀 Quick Start
-# Clone repo
-git clone https://github.com/your-username/foundry-counter.git
-cd foundry-counter
-
-# Install dependencies
-forge install
-
-# Build
+bash
+Copy code
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+3️⃣ Build the project
+bash
+Copy code
 forge build
+4️⃣ Run tests
+bash
+Copy code
+forge test
+🛠️ Example: Counter Contract
+solidity
+Copy code
+pragma solidity ^0.8.0;
 
-# Run tests
-forge test -vv
+contract Counter {
+    uint256 public number;
 
-📖 Resources
+    function increment() public {
+        number++;
+    }
 
-📘 Foundry Book
+    function decrement() public {
+        number--;
+    }
+}
+✅ Features:
 
-🧾 Solidity Docs
+Increment & decrement functionality
+
+Storage & retrieval of values
+
+Fully tested using Foundry
+
+📚 Resources
+📖 Foundry Book
+
+🛠 Solidity Docs
+
+🧪 Ethereum Docs
+
+🤝 Contributing
+Contributions are welcome! 🎉
+
+Fork this repo
+
+Create a new branch (feature/my-feature)
+
+Commit your changes
+
+Push and open a Pull Request
+
+📜 License
+MIT License © 2025 Aditya Sharma
