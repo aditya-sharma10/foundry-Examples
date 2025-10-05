@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+contract Counter {
+    address payable public owner; //the owner is payable because we want to send ether to the owner
+    constructor() {
+        owner = payable(msg.sender); //msg.sender is not payable by default, so we need to cast it to payable
+    }
+    modifier ownerCheck {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
+    
+    function sendVal(uint256 _val) public payable {
+        require(_val > 0, "Value must be greater than zero");
+        (bool sent, ) = owner.call{value: _val}("");
+        require(sent, "Failed to send Ether");
+    }
+    function setOwner(address payable _newOwner) public ownerCheck {
+        owner = _newOwner;
+    }
+}
+
+    
+    
+    
+
+
