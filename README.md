@@ -15,10 +15,10 @@ The project is designed for:
 ## 📦 Project Structure  
 
 📂 foundry-Examples  
-┣ 📂 src # Solidity contracts  
-┣ 📂 script # Deployment scripts  
-┣ 📂 test # Unit tests written in Solidity  
-┗ 📄 README.md # Project documentation  
+┣ 📂 src        # Solidity contracts  
+┣ 📂 script     # Deployment scripts  
+┣ 📂 test       # Unit tests written in Solidity  
+┗ 📄 README.md  # Project documentation  
 
 ---
 
@@ -43,7 +43,7 @@ forge build
 bash
 Copy code
 forge test
-🛠️ Example Contracts
+🛠️ Contracts & Tests
 1️⃣ Counter Contract
 solidity
 Copy code
@@ -67,6 +67,10 @@ Increment & decrement functionality
 Storage & retrieval of values
 
 Fully tested using Foundry
+
+
+
+
 
 2️⃣ Event Contract
 solidity
@@ -95,25 +99,9 @@ Demonstrates event logging and indexed parameters
 
 Useful for testing event listeners in smart contract applications
 
-📚 Resources
-📖 Foundry Book
-
-🛠 Solidity Docs
-
-🧪 Ethereum Docs
-
-🤝 Contributing
-Contributions are welcome! 🎉
-
-Fork this repo
-
-Create a new branch (feature/my-feature)
-
-Commit your changes
-
-Push and open a Pull Request
-
-
+3️⃣ Event Contract Tests
+solidity
+Copy code
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
@@ -133,11 +121,9 @@ contract EventTest is Test {
 
     // Test single transfer event
     function testTransfer() public {
-        // Expect the event to be emitted with specific parameters
-        vm.expectEmit(true, true, false, true); // check indexed from, to; skip data topics; check value
+        vm.expectEmit(true, true, false, true);
         emit Transfer(address(1), address(2), 100);
 
-        // Call the contract function that should emit the event
         eventContract.transfer(address(1), address(2), 100);
     }
 
@@ -153,25 +139,50 @@ contract EventTest is Test {
         amounts[1] = 200;
         amounts[2] = 300;
 
-        // Loop through each expected event
         for (uint256 i = 0; i < to.length; i++) {
             vm.expectEmit(true, true, false, true);
             emit Transfer(address(0xabc), to[i], amounts[i]);
         }
 
-        // Call the contract function that emits multiple events
         eventContract.transferMany(address(0xabc), to, amounts);
     }
 }
-✅ Notes / Best Practices
-vm.expectEmit: This sets the expectation for an event before the actual call. The parameters (checkTopic1, checkTopic2, checkTopic3, checkData) allow selective matching of indexed and non-indexed event parameters.
+✅ Notes / Best Practices:
 
-Local event declaration: The test must declare the event locally with the same signature for expectEmit to work.
+vm.expectEmit: Sets expectation for an event before the call. Parameters (checkTopic1, checkTopic2, checkTopic3, checkData) allow selective matching.
 
-Multiple event tests: For transferMany, you must call vm.expectEmit for each event individually, as you’ve done.
+Local event declaration is required for expectEmit to work.
 
-Naming conventions: I renamed event1 → eventContract and Eventtest → EventTest for readability.
+For transferMany, each expected event must have its own vm.expectEmit.
+
+Naming conventions updated for clarity: event1 → eventContract, Eventtest → EventTest.
+
+📚 Resources
+📖 Foundry Book
+
+🛠 Solidity Docs
+
+🧪 Ethereum Docs
+
+🤝 Contributing
+Contributions are welcome! 🎉
+
+Fork this repo
+
+Create a new branch (feature/my-feature)
+
+Commit your changes
+
+Push and open a Pull Request
 
 📜 License
 MIT License © 2025 Aditya Sharma
 
+pgsql
+Copy code
+
+This version separates **contracts** and **tests** into their own clear sections, adds spacing, and keeps the README visually easy to scan.  
+
+If you want, I can **also add badges and a “Run Tests” status section** to make it even more GitHub-friendly. It’ll look professional at first glance.  
+
+Do you want me to do that?
